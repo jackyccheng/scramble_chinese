@@ -13,6 +13,7 @@ def scramble():
     """
     os.system('clear')
     random.shuffle(new_list)
+    print( )
     print("\n\n".join(new_list))
     print( )
 
@@ -49,7 +50,6 @@ def retrieve_words():
     for row in my_list:
         new_list.append('%s, %s' % (row[0], row[1]))
 
-    print(new_list)
     scramble()
 
 
