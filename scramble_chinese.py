@@ -44,8 +44,8 @@ if __name__ == '__main__':
     SCOPES = 'https://www.googleapis.com/auth/spreadsheets.readonly'
 
     # This SHEET_ID is the name in your url
-    SHEET_ID = '1NRIfGro5mnUXnOsW4jzygqtyfv4vGefkbG_kzq1td7E'
-    SHEET_RANGE = 'english_words!A:B'
+    SHEET_ID = '<insert here>'
+    SHEET_RANGE = '<insert sheet name + selection'
 
     # accessing google account to read the workbook
     store = file.Storage('token.json')
