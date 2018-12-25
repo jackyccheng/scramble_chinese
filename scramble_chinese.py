@@ -24,23 +24,6 @@ def retrieve_words():
     Move words into new_list
     """
 
-    print("Initializing: calling to Google Sheets")
-
-    # Setting scope, and specifying Google workbook and sheet name
-    SCOPES = 'https://www.googleapis.com/auth/spreadsheets.readonly'
-
-    # This SHEET_ID is the name in your url
-    SHEET_ID = '<>'
-    SHEET_RANGE = 'Sheet1!A:B'
-
-    # accessing google account to read the workbook
-    store = file.Storage('token.json')
-    creds = store.get()
-    if not creds or creds.invalid:
-        flow = client.flow_from_clientsecrets('credentials.json', SCOPES)
-        creds = tools.run_flow(flow, store)
-    service = build('sheets', 'v4', http=creds.authorize(Http()))
-
     sheet = service.spreadsheets()
     result = sheet.values().get(spreadsheetId=SHEET_ID,
                                     range=SHEET_RANGE).execute()
@@ -54,6 +37,24 @@ def retrieve_words():
 
 
 if __name__ == '__main__':
+
+    print("Initializing: calling to Google Sheets")
+
+    # Setting scope, and specifying Google workbook and sheet name
+    SCOPES = 'https://www.googleapis.com/auth/spreadsheets.readonly'
+
+    # This SHEET_ID is the name in your url
+    SHEET_ID = '1NRIfGro5mnUXnOsW4jzygqtyfv4vGefkbG_kzq1td7E'
+    SHEET_RANGE = 'english_words!A:B'
+
+    # accessing google account to read the workbook
+    store = file.Storage('token.json')
+    creds = store.get()
+    if not creds or creds.invalid:
+        flow = client.flow_from_clientsecrets('credentials.json', SCOPES)
+        creds = tools.run_flow(flow, store)
+    service = build('sheets', 'v4', http=creds.authorize(Http()))
+
     my_list = []
     new_list = []
     retrieve_words()
