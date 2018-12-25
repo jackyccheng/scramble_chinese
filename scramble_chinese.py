@@ -47,7 +47,7 @@ if __name__ == '__main__':
     SHEET_ID = '<insert here>'
     SHEET_RANGE = '<insert sheet name + selection'
 
-    # accessing google account to read the workbook
+    # Accessing google account to read the workbook
     store = file.Storage('token.json')
     creds = store.get()
     if not creds or creds.invalid:
