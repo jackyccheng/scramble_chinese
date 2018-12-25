@@ -14,7 +14,7 @@ def scramble():
     os.system('clear')
     random.shuffle(new_list)
     print( )
-    print("\n\n".join(new_list))
+    print("\n\n".join(new_list[:10]))
     print( )
 
 
