@@ -6,7 +6,7 @@ import os
 import random
 
 
-def scramble():
+def scramble_words():
     """
     Shuffle words in new_list
     Print reordered words by newline
@@ -33,7 +33,7 @@ def retrieve_words():
     for row in my_list:
         new_list.append('%s, %s' % (row[0], row[1]))
 
-    scramble()
+    scramble_words ()
 
 
 if __name__ == '__main__':
@@ -44,8 +44,8 @@ if __name__ == '__main__':
     SCOPES = 'https://www.googleapis.com/auth/spreadsheets.readonly'
 
     # This SHEET_ID is the name in your url
-    SHEET_ID = '<insert here>'
-    SHEET_RANGE = '<insert sheet name + selection'
+    SHEET_ID = '<sheet id>'
+    SHEET_RANGE = 'english_words!A:B'
 
     # Accessing google account to read the workbook
     store = file.Storage('token.json')
