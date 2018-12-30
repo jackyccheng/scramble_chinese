@@ -4,6 +4,17 @@ from httplib2 import Http
 from oauth2client import file, client, tools
 import os
 import random
+import argparse
+
+
+def get_args(argv = None):
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        '--chinese',
+        action = 'store_true',
+        help = 'Read Chinese column from sheet'
+        )
+    return parser.parse_args(argv)
 
 
 def scramble_words():
@@ -18,12 +29,11 @@ def scramble_words():
     print( )
 
 
-def retrieve_words():
+def retrieve_words(first_column, second_column):
     """
-    Use Google Sheets API to retrieve list of words
-    Move words into new_list
+    Use Google Sheets API to retrieve values
+    Passing in arguments on which column to retrieve
     """
-
     sheet = service.spreadsheets()
     result = sheet.values().get(spreadsheetId=SHEET_ID,
                                     range=SHEET_RANGE).execute()
@@ -31,9 +41,9 @@ def retrieve_words():
 
     # Sending output into list format
     for row in my_list:
-        new_list.append('%s, %s' % (row[0], row[1]))
+        new_list.append('%s, %s' % (row[first_column], row[second_column]))
 
-    scramble_words ()
+    scramble_words()
 
 
 if __name__ == '__main__':
@@ -44,8 +54,8 @@ if __name__ == '__main__':
     SCOPES = 'https://www.googleapis.com/auth/spreadsheets.readonly'
 
     # This SHEET_ID is the name in your url
-    SHEET_ID = '<sheet id>'
-    SHEET_RANGE = 'english_words!A:B'
+    SHEET_ID = '1NRIfGro5mnUXnOsW4jzygqtyfv4vGefkbG_kzq1td7E'
+    SHEET_RANGE = 'words!A:C'
 
     # Accessing google account to read the workbook
     store = file.Storage('token.json')
@@ -55,6 +65,15 @@ if __name__ == '__main__':
         creds = tools.run_flow(flow, store)
     service = build('sheets', 'v4', http=creds.authorize(Http()))
 
+    first_column = ()
+    second_column = ()
+
     my_list = []
     new_list = []
-    retrieve_words()
+
+    args = get_args()
+
+    if args.chinese:
+        retrieve_words(2, 1)
+    else:
+        retrieve_words(0, 1)
