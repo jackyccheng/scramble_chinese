@@ -70,7 +70,7 @@ if __name__ == '__main__':
     SCOPES = 'https://www.googleapis.com/auth/spreadsheets.readonly'
 
     # This SHEET_ID is the name in your url
-    SHEET_ID = '1NRIfGro5mnUXnOsW4jzygqtyfv4vGefkbG_kzq1td7E'
+    SHEET_ID = '<input sheet ID here>'
     SHEET_RANGE = 'words!A:C'
 
     # Accessing google account to read the workbook
