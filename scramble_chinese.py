@@ -15,16 +15,14 @@ def get_args(argv = None):
     # Load Chinese characters if option is passed through
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        '-c',
-        '--chinese',
+        '-c', '--chinese',
         action = 'store_true',
         help = 'Read Chinese column from sheet'
         )
 
     # Change number of output lines (defaults to 15 lines)
     parser.add_argument(
-        '-n',
-        '--noutput',
+        '-n', '--noutput',
         type = int,
         default = 15,
         help = 'Number of lines in output'
@@ -70,7 +68,7 @@ if __name__ == '__main__':
     SCOPES = 'https://www.googleapis.com/auth/spreadsheets.readonly'
 
     # This SHEET_ID is the name in your url
-    SHEET_ID = '<input sheet ID here>'
+    SHEET_ID = '1NRIfGro5mnUXnOsW4jzygqtyfv4vGefkbG_kzq1td7E'
     SHEET_RANGE = 'words!A:C'
 
     # Accessing google account to read the workbook
