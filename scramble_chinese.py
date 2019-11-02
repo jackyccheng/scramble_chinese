@@ -1,7 +1,8 @@
 from __future__ import print_function
+import pickle
 from googleapiclient.discovery import build
-from httplib2 import Http
-from oauth2client import file, client, tools
+from google_auth_oauthlib.flow import InstalledAppFlow
+from google.auth.transport.requests import Request
 import os
 import sys
 import random
@@ -68,16 +69,26 @@ if __name__ == '__main__':
     SCOPES = 'https://www.googleapis.com/auth/spreadsheets.readonly'
 
     # This SHEET_ID is the name in your url
-    SHEET_ID = '<sheet_id>'
-    SHEET_RANGE = 'words!A:C'
+    SHEET_ID = '1NRIfGro5mnUXnOsW4jzygqtyfv4vGefkbG_kzq1td7E'
+    SHEET_RANGE = 'words!B:D'
 
     # Accessing google account to read the workbook
-    store = file.Storage('token.json')
-    creds = store.get()
-    if not creds or creds.invalid:
-        flow = client.flow_from_clientsecrets('credentials.json', SCOPES)
-        creds = tools.run_flow(flow, store)
-    service = build('sheets', 'v4', http=creds.authorize(Http()))
+    creds = None
+    if os.path.exists('token.pickle'):
+        with open('token.pickle', 'rb') as token:
+            creds = pickle.load(token)
+    # If there are no (valid) credentials available, let the user log in.
+    if not creds or not creds.valid:
+        if creds and creds.expired and creds.refresh_token:
+            creds.refresh(Request())
+        else:
+            flow = InstalledAppFlow.from_client_secrets_file(
+                'credentials.json', SCOPES)
+            creds = flow.run_local_server(port=0)
+        # Save the credentials for the next run
+        with open('token.pickle', 'wb') as token:
+            pickle.dump(creds, token)
+    service = build('sheets', 'v4', credentials=creds)
 
     # Defining a few empty variables for later use
     first_column = ()
