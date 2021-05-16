@@ -36,6 +36,7 @@ def scramble_words(noutput):
     """
     Shuffle words in new_list
     Print reordered words by newline
+    Note: Clear is used for ipython in terminal
     """
     os.system('clear')
     random.shuffle(new_list)
