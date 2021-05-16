@@ -26,7 +26,7 @@ def get_args(argv = None):
         '-n', '--noutput',
         type = int,
         default = 15,
-        help = 'Number of lines in output'
+        help = 'Number of lines in output (defaults to 15)'
         )
 
     return parser.parse_args()
@@ -66,10 +66,10 @@ if __name__ == '__main__':
     print("Initializing: calling to Google Sheets")
 
     # Setting scope, and specifying Google workbook and sheet name
-    SCOPES = 'https://www.googleapis.com/auth/spreadsheets.readonly'
+    SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 
     # This SHEET_ID is the name in your url
-    SHEET_ID = '1NRIfGro5mnUXnOsW4jzygqtyfv4vGefkbG_kzq1td7E'
+    SHEET_ID = '<hidden for privacy purposes>'
     SHEET_RANGE = 'words!B:D'
 
     # Accessing google account to read the workbook
@@ -103,4 +103,4 @@ if __name__ == '__main__':
     if args.chinese:
         retrieve_words(2, 1)
     else:
-        retrieve_words(0, 1)
+        retrieve_words(1, 0)
